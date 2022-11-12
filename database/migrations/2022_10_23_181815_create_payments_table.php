@@ -25,6 +25,7 @@ class CreatePaymentsTable extends Migration
         $table->Integer('Verification_Status')->default('0');
 
         $table->string('Payment_Recipt')->nullable();
+        $table->timestamps();
 
        
         });

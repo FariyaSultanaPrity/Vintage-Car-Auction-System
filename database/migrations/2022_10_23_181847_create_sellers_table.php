@@ -21,6 +21,7 @@ class CreateSellersTable extends Migration
             $table->Integer('S_accountNo');
 
             $table->Integer('Rating')->default('0');
+            $table->timestamps();
         });
     }
 

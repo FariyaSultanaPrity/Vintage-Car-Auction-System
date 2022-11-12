@@ -32,6 +32,8 @@ class CreateUsersTable extends Migration
 
             $table->string('U_Photo');
             $table->string('U_otp')->nullable();
+
+            $table->timestamps();
             
         });
     }

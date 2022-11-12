@@ -18,6 +18,7 @@ class CreateComplaintsTable extends Migration
             $table->Integer('U_Id');
             $table->string('Description');
             $table->string('Status');
+            $table->timestamps();
         });
     }
 

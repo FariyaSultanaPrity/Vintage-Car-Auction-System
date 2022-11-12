@@ -22,6 +22,7 @@ class CreateAdminsTable extends Migration
             $table->string('A_Phone')->uniqid();
             $table->string('A_Photo');
             $table->string('A_otp')->nullable();
+            $table->timestamps();
             
 
         });

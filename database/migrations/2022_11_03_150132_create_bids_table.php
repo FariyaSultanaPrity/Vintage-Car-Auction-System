@@ -20,6 +20,7 @@ class CreateBidsTable extends Migration
             $table->double('Bid_Amount');
             $table->string('Bid_Time');
             $table->Integer('U_Id');
+            $table->timestamps();
            
         });
     }

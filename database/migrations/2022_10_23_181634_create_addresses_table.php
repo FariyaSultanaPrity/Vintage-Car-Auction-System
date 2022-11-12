@@ -25,6 +25,7 @@ class CreateAddressesTable extends Migration
             $table->string('Country');
 
             $table->string('ZipCode');
+            $table->timestamps();
         });
     }
 

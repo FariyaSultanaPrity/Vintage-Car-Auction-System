@@ -20,6 +20,7 @@ class CreateCatagoriesTable extends Migration
             $table->string('Glass');
             $table->string('Wheel_Size');
             $table->string('Body');
+            $table->timestamps();
         });
     }
 

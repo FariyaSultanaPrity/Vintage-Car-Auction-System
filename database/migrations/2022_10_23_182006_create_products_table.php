@@ -21,6 +21,7 @@ class CreateProductsTable extends Migration
             $table->string('P_Photo');
             $table->Integer('Car_Reg_Details_Id');
             $table->Integer('Valid_Status')->default('0');
+            $table->timestamps();
         });
     }
 

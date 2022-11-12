@@ -22,7 +22,16 @@ class CreateAuctionsTable extends Migration
             $table->Integer('P_Id');          
             $table->double('Start_Amount');
             $table->double('Final_Amount')->nullable();
+            $table->string('Start_Time');
+            $table->string('End_Time');
             $table->Integer('Win_Status')->default('0');
+            $table->string('Picture')->nullable();
+            $table->Integer('Catagory_Id');
+            $table->Integer('RegD_Id');
+
+            $table->string('S_BankName');
+            $table->Integer('S_AccountNo');
+            $table->timestamps();
         });
     }
 

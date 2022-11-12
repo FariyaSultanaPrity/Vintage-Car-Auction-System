@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Console;
-
+use App\Models\Auction;
+use Carbon\Carbon;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -24,8 +25,27 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        $schedule->call(function () {
+            
+            $auctions=Auction::all(); 
+           
+            foreach($auctions as $auction){
+                $time2=Carbon::parse(Carbon::now()->addHours(6));
+                $time= Carbon::parse($auction->End_Time);
+                  if($time2 >= $time){
+
+                       $auction->Win_Status=1;
+                       $auction->save();
+                  }
+
+                 
+      
+                
+            
+                 
+            }
+            
+        })->everyMinute();   
     }
 
     /**
