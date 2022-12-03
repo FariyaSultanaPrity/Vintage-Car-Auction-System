@@ -242,15 +242,102 @@ public function APIList(){
 }
 public function APIPost(Request $request){
    $catagory= new Catagory();
-        $catagory->Model=$request->Model;
-        $catagory->Color=$request->Color;
-        $catagory->Glass=$request->Glass;
-        $catagory->Wheel_Size=$request->Wheel_Size;
-        $catagory->Body=$request->Body;
+        $catagory->Model=$request->model;
+        $catagory->Color=$request->color;
+        $catagory->Glass=$request->glass;
+        $catagory->Wheel_Size=$request->wheel_size;
+        $catagory->Body=$request->body;
+        $catagory->save();
 
-   return $req;
+  return $request;
 }
 
 
 
-   }
+public function apiproductCreateSubmit(Request $request){
+
+ 
+ 
+     $catagory= new Catagory();
+     $catagory->Model=$request->Model;
+     $catagory->Color=$request->Color;
+     $catagory->Glass=$request->Glass;
+     $catagory->Wheel_Size=$request->Wheel_Size;
+     $catagory->Body=$request->Body;
+
+     $result=$catagory->save();
+
+    
+     if($result){
+   
+      $car_reg= new CarRegDetail();
+      $car_reg->Reg_Num	=$request->Reg_Num;
+      $car_reg->Original_Purchase_Invoice_Photo=$request->Original_Purchase_Invoice_Photo;
+      $car_reg->Insurance_Photo=$request->Insurance_Photo;
+      $car_reg->Road_Tax_Recipt_Certificate=$request->Road_Tax_Recipt_Certificate;
+      $car_reg->Pullotion_Certificate= $request->Pullotion_Certificate;
+
+      $result1=$car_reg->save();
+
+     
+
+      if($result1){
+
+         $product= new Product();
+         $product->S_Id	=$request->S_Id;
+         $product->Category_Id=$catagory->id;
+         $product->P_CarName=$request->P_CarName;
+         $product->P_Photo= $request->P_Photo;
+         $product->Car_Reg_Details_Id= $car_reg->id;
+        
+         $result2=$product->save();
+              
+         if($result2){
+            return "successfull";
+          
+           
+         }
+         else{
+            return "failed";
+         }
+
+          
+      }
+
+      else{
+
+        return "failed";
+
+      }
+
+        
+        
+     }
+     else{
+      return "failed";
+         
+     }
+ }
+
+
+ public function apisellerProductList(){
+   $id=1;
+   $seller=Seller::where('id',$id)->first();
+
+  $product=Product::where('S_id',$id)->first();
+  if($product){
+   
+   $items=$seller->product;
+   return "successfull";
+
+  }
+  else{
+         return "unsuccessfull";;
+  }
+
+
+}
+ }
+
+
+   

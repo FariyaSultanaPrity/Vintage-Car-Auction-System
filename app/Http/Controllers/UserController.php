@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Seller;
+use App\Models\Token;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use DateTime;
 use Session;
 
 
@@ -109,6 +112,36 @@ public function seller(){
 
              
          }
+
+
+         public function  apilogin(Request $request){
+
+            $user = User::where('U_Email',$request->U_Email)
+            ->where('U_Pass',$request->U_Pass)
+            ->first();
+            
+            if($user){
+                $api_token = Str::random(64);
+                $token =new Token();
+                $token->U_Id = $user->id;
+                $token->tokenn = $api_token;
+                $token->create_at = new DateTime();
+                $token->save();
+                return $token;
+            }
+            return "No user found";
+    
+        }
+        public function  apilogout(Request $req){
+    
+            $token = Token::where('tokenn',$req->token)->first();
+            if($token){
+                $token->expire_at =new DateTime();
+                $token->save();
+                return $token;
+            }
+    
+        }
 
 
         }

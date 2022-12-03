@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\SellerProductController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,9 +15,11 @@ use App\Http\Controllers\SellerProductController;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+
 
 Route::get('/catagory/list',[SellerProductController::class,'APIList']);
-Route::post('/catagory/list',[SellerProductController::class,'APIPost']);
+Route::post('/catagory/list-post',[SellerProductController::class,'APIPost']);
+Route::post('/product/create',[SellerProductController::class,'apiproductCreateSubmit']);
+
+Route::post('/login',[UserController::class,'apilogin']); 
+Route::post('/logout',[UserController::class,'apilogout']); 
